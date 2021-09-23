@@ -1,0 +1,43 @@
+﻿@model WebBiblioteca.Models.LivroView
+
+@{
+    ViewData["Title"] = "Cadastro";
+}
+
+<h4>Cadastrar Livros.</h4>
+<hr />
+@using (Html.BeginForm("Incluir", "Home", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Cadastro">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>                
+                <div class="form-group">
+                    @Html.DropDownListFor(o => o.IdEditora,new SelectList(ViewBag.Editoras, "Id", "Nome"))
+                    @Html.ValidationMessageFor(model => model.IdEditora, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    <label asp-for="Nome" class="control-label"></label>
+                    <input id="txtNome" asp-for="Nome" class="form-control" />
+                    <span asp-validation-for="Nome" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Autor" class="control-label"></label>
+                    <input id="txtAutor" asp-for="Autor" class="form-control" />
+                    <span asp-validation-for="Autor" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Cadastrar Livro" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+}
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

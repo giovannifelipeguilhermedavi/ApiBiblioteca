@@ -1,0 +1,60 @@
+﻿@model IEnumerable<WebBiblioteca.Models.LivroView>
+
+@{
+    ViewData["Title"] = "Administração";
+}
+
+<h1>Área Administrativa</h1>
+
+<p>
+    <a asp-action="Cadastro">Novo Cadastro</a>
+</p>
+@if (Model != null)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nome)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Autor)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Editora)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Autor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Editora)
+                </td>
+                <td>
+                    @Html.ActionLink("Delete", "Delete", "Home", new { id = item.Id })
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div>Acesso permitido somente para administradores.</div>
+}
+
